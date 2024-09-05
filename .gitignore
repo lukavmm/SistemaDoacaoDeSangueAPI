@@ -1,0 +1,14 @@
+# Arquivos de sistema do Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build do Visual Studio
+[Bb]in/
+[Oo]bj/
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários
+*.tmp
