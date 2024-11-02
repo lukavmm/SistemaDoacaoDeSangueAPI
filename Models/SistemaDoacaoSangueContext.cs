@@ -13,6 +13,8 @@ public partial class SistemaDoacaoSangueContext : DbContext
     {
     }
 
+    public virtual DbSet<Agendamento> Agendamentos { get; set; }
+
     public virtual DbSet<Doadore> Doadores { get; set; }
 
     public virtual DbSet<Hemocentro> Hemocentros { get; set; }
@@ -21,6 +23,46 @@ public partial class SistemaDoacaoSangueContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Agendamento>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Agendame__3213E83F30EE4D15");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.AtualizadoEm)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("atualizado_em");
+            entity.Property(e => e.CriadoEm)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("criado_em");
+            entity.Property(e => e.Data)
+                .HasColumnType("date")
+                .HasColumnName("data");
+            entity.Property(e => e.DoadorId).HasColumnName("doador_id");
+            entity.Property(e => e.HemocentroId).HasColumnName("hemocentro_id");
+            entity.Property(e => e.Hora).HasColumnName("hora");
+            entity.Property(e => e.Obs)
+                .HasMaxLength(255)
+                .HasColumnName("obs");
+            entity.Property(e => e.Status)
+                .IsRequired()
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('confirmado')")
+                .HasColumnName("status");
+
+            entity.HasOne(d => d.Doador).WithMany(p => p.Agendamentos)
+                .HasForeignKey(d => d.DoadorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Doador_Agendamentos");
+
+            entity.HasOne(d => d.Hemocentro).WithMany(p => p.Agendamentos)
+                .HasForeignKey(d => d.HemocentroId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Hemocentro_Agendamentos");
+        });
+
         modelBuilder.Entity<Doadore>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Doadores__3213E83F5710F072");

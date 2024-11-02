@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace SistemaDoacaoSangue.Payloads
 {
-    public record MessagePayload(string message, string error);
+    public record MessagePayload(string ?message, string ?error);
 
 
 }

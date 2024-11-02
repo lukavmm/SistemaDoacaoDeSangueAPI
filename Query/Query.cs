@@ -59,4 +59,41 @@ public class Query
 
         return perfil;
     }
+
+    [UseDbContext(typeof(SistemaDoacaoSangueContext))]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+
+    public IQueryable<Hemocentro> GetHemocentros([ScopedService] SistemaDoacaoSangueContext context, [GlobalState(nameof(ClaimsPrincipal))] ClaimsPrincipal claimsPrincipal)
+    {
+        var claims = claimsPrincipal.Claims.ToList();
+
+        return context.Hemocentros;
+    }
+
+
+    [UseDbContext(typeof(SistemaDoacaoSangueContext))]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+
+    public IQueryable<Doadore> getDoadores([ScopedService] SistemaDoacaoSangueContext context, [GlobalState(nameof(ClaimsPrincipal))] ClaimsPrincipal claimsPrincipal)
+    {
+        var claims = claimsPrincipal.Claims.ToList();
+
+        return context.Doadores;
+    }
+
+    [UseDbContext(typeof(SistemaDoacaoSangueContext))]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+
+    public IQueryable<Agendamento> GetAgendamentos([ScopedService] SistemaDoacaoSangueContext context, [GlobalState(nameof(ClaimsPrincipal))] ClaimsPrincipal claimsPrincipal)
+    {
+        var claims = claimsPrincipal.Claims.ToList();
+
+        return context.Agendamentos;
+    }
 }

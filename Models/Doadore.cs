@@ -29,5 +29,7 @@ public partial class Doadore
 
     public decimal Peso { get; set; }
 
+    public virtual ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
+
     public virtual Usuario Usuario { get; set; }
 }

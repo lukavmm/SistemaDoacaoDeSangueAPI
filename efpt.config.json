@@ -15,6 +15,10 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[Agendamentos]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Doadores]",
          "ObjectType": 0
       },

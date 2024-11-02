@@ -21,5 +21,7 @@ public partial class Hemocentro
 
     public string Cnpj { get; set; }
 
+    public virtual ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
+
     public virtual Usuario Usuario { get; set; }
 }
